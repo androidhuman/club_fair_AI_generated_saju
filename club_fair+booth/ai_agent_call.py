@@ -26,7 +26,7 @@ def generate_report_with_snack(name, saju_text, snacks):
         
         # 4. 가장 안정적인 기본 모델 이름으로 고정
         model = genai.GenerativeModel(
-            model_name="gemini-3-flash",
+            model_name="gemini-3-flash-preview",
             system_instruction=system_prompt
         )
         
