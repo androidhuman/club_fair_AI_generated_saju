@@ -20,6 +20,4 @@
 
 ### Through this information, the generative AI would analyze user's saju and provide the information and for fun, it provide which kind of the snacks they deserved followed by their saju.  
 
-
-
 Contributor: Kwon, jihun
