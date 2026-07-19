@@ -1,19 +1,19 @@
 # club_fair_AI_generated_saju
-This is the toy project for club fair activity of CWT, Crash While Testing in Ghent University Global Campus, 2026-2027.
-This project provide the guess of the people's destiny based on their birthday and time information which called **saju**.
---------------------------------------------------------------------------------------------------------------------------
-1. What is Saju?
+#### This is the toy project for club fair activity of CWT, Crash While Testing in Ghent University Global Campus, 2026-2027.
+#### This project provide the guess of the people's destiny based on their birthday and time information which called **saju**.
 
-Saju refers to the Heavenly Stems and Earthly Branches (Cheongan-Jiji) that correspond to the exact year, month, day, and time a person was born.
+### 1. What is Saju?
 
-2. The Structure
+#### Saju refers to the Heavenly Stems and Earthly Branches (Cheongan-Jiji) that correspond to the exact year, month, day, and time a person was born.
 
-It is composed of four distinct pillars: the Year Pillar, Month Pillar, Day Pillar, and Time Pillar. Because each of these four pillars is made up of a combination of one Heavenly Stem and one Earthly Branch, it results in a total of eight characters (often referred to as Palja).
+### 2. The Structure
 
-3. How it predicts destiny
+#### It is composed of four distinct pillars: the Year Pillar, Month Pillar, Day Pillar, and Time Pillar. Because each of these four pillars is made up of a combination of one Heavenly Stem and one Earthly Branch, it results in a total of eight characters (often referred to as Palja).
 
-Ultimately, Saju is an analytical system used to deduce a person's destiny. By converting a person's birth time into these Heavenly Stems and Earthly Branches, it predicts the good, bad, happy, and unfortunate events in their life. This deduction is made by analyzing the complex interactions—such as generating, overcoming, controlling, and transforming—of Yin-Yang and the Five Elements (Yin-Yang Wu-Xing).
---------------------------------------------------------------------------------------------------------------------------
-Through this information, the generative AI would analyze user's saju and provide the information and for fun, it provide which kind of the snacks they deserved followed by their saju.  
+### 3. How it predicts destiny
+
+#### Ultimately, Saju is an analytical system used to deduce a person's destiny. By converting a person's birth time into these Heavenly Stems and Earthly Branches, it predicts the good, bad, happy, and unfortunate events in their life. This deduction is made by analyzing the complex interactions—such as generating, overcoming, controlling, and transforming—of Yin-Yang and the Five Elements (Yin-Yang Wu-Xing).
+
+### Through this information, the generative AI would analyze user's saju and provide the information and for fun, it provide which kind of the snacks they deserved followed by their saju.  
 
 Contributor: Kwon, jihun
