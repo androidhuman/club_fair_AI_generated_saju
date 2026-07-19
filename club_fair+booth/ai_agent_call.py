@@ -3,34 +3,17 @@ import google.generativeai as genai
 
 def generate_report_with_snack(name, saju_text, snacks):
     try:
-        # 1. API 키 불러오기
+        # 1. API 키 불러오기 및 숨겨진 공백 문자열 제거 (.strip() 추가)
         raw_api_key = st.secrets["GEMINI_API_KEY"]
-        genai.configure(api_key=raw_api_key.strip())
+        clean_api_key = raw_api_key.strip()
+        genai.configure(api_key=clean_api_key)
         
-        # 2. [핵심] 내 API 키로 쓸 수 있는 모델 자동 탐색
-        available_models = []
-        for m in genai.list_models():
-            if 'generateContent' in m.supported_generation_methods:
-                # 'models/' 접두사를 제거하여 이름만 추출
-                clean_name = m.name.replace("models/", "")
-                available_models.append(clean_name)
-                
-        # 쓸 수 있는 모델이 아예 없다면 키 권한 문제
-        if not available_models:
-            return "🚨 이 API 키로는 구글 AI를 사용할 수 없습니다. Google AI Studio에서 'Create API key in a new project'로 키를 완전히 새로 발급받아 교체해 보세요."
-            
-        # 스캔된 목록 중 가장 첫 번째 모델을 자동으로 낚아채서 사용
-        target_model = available_models[0]
-        
-        # 3. 간식 리스트 텍스트화 및 프롬프트 작성
+        # 2. 간식 리스트 텍스트화
         snack_list_text = ", ".join(snacks)
         
-        combined_prompt = f"""
+        # 3. 시스템 프롬프트 세팅
+        system_prompt = f"""
         너는 20대 대학생들을 대상으로 유쾌하고 센스 있게 사주를 풀이해 주는 '동아리 부스 마스코트 역술가'야.
-        
-        [방문객 정보]
-        이름: {name}
-        사주 데이터: {saju_text}
         
         [임무]
         1. 제공된 사주 데이터를 바탕으로 사용자의 올해 운세, 학업운, 대인관계 등을 3~4문장으로 재미있게 해석해 줘. 너무 무겁지 않게 트렌디한 말투를 사용해.
@@ -41,17 +24,26 @@ def generate_report_with_snack(name, saju_text, snacks):
         마크다운(Markdown)을 활용해서 글씨를 굵게 하거나 목록을 만들어 가독성 좋게 작성해 줘. 이모지도 적극적으로 사용해.
         """
         
-        # 4. 동적으로 찾은 모델로 실행
-        model = genai.GenerativeModel(model_name=target_model)
+        # 4. 가장 안정적인 기본 모델 이름으로 고정
+        model = genai.GenerativeModel(
+            model_name="gemini-3-flash",
+            system_instruction=system_prompt
+        )
+        
+        # 5. 사용자 프롬프트
+        user_prompt = f"이름: {name}\n사주 데이터: {saju_text}"
+        
+        # 6. 결과 생성
         response = model.generate_content(
-            combined_prompt,
-            generation_config=genai.types.GenerationConfig(temperature=0.7)
+            user_prompt,
+            generation_config=genai.types.GenerationConfig(
+                temperature=0.7
+            )
         )
         
         return response.text
 
     except Exception as e:
-        # 에러가 나면 어떤 모델을 시도했는지 화면에 같이 출력해 줍니다.
-        used_model = target_model if 'target_model' in locals() else '탐색 실패'
-        error_msg = f"🚨 AI 서버 통신 에러\n\n- 시도한 모델: {used_model}\n- 상세 로그: {e}"
+        # 에러가 나더라도 빨간 에러창으로 앱이 멈추지 않고, 결과창에 에러 원인을 예쁘게 출력합니다.
+        error_msg = f"🚨 AI 서버와 통신하는 중 문제가 발생했습니다.\n\n(개발자용 에러 로그: {e})"
         return error_msg
