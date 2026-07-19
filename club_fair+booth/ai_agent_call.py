@@ -26,7 +26,7 @@ def generate_report_with_snack(name, saju_text, snacks):
 
     # 4. Gemini 모델 설정 (Flash 모델 사용, 시스템 명령어 주입)
     model = genai.GenerativeModel(
-        model_name="gemini-1.5-flash-latest",
+        model_name="models/gemini-1.5-flash",
         system_instruction=system_prompt
     )
 
